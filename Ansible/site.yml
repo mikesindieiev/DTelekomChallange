@@ -19,6 +19,18 @@
       name: ['docker-ce', 'docker-ce-cli', 'containerd.io']
       update_cache: yes
 
+  - name: Enable container logging to Docker host
+    copy:
+      dest: "/etc/docker/daemon.json"
+      content: |
+        {
+           "log-driver": "syslog",
+           "log-opts": {
+           "syslog-address": "unixgram:///dev/log",
+           "tag": "docker/{{ '{{' }}.Name{{ '}}' }}"
+           }
+        }
+
   - name: Restart Docker service
     ansible.builtin.service:
       name: docker
@@ -26,5 +38,4 @@
       enabled: true
 
 # ToDo: 
-# change log driver to syslog
 # harden the installation
