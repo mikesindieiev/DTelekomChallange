@@ -1,0 +1,15 @@
+#!/usr/bin/env python3
+from pyowm.owm import OWM
+import os
+
+API_KEY = os.getenv('OWM_API_KEY')
+OWM_CITY = os.getenv('OWM_CITY')
+owm = OWM(API_KEY)
+
+mgr = owm.weather_manager()
+weather = mgr.weather_at_place(OWM_CITY).weather
+description = weather.detailed_status
+humidity = weather.humidity
+temp_dict_fahrenheit = weather.temperature('fahrenheit').get('temp')
+
+print('city="{0}", description="{1}", temp={2}, humidity={3}'.format(OWM_CITY, description, temp_dict_fahrenheit, humidity))
