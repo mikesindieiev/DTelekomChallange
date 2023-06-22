@@ -32,6 +32,11 @@ $ docker info | grep 'Logging Driver'
 Logging Driver: syslog
 ```
 
+In order to run successfully an Ansible playbook, "cd" to Ansible directory and execute the following command: 
+```bash
+ansible-playbook -c local -i localhost, site.yml
+```
+
 ### 1.2 Write a weather reporting program
 
 Create a simple script getweather that will get the current weather from
@@ -60,6 +65,14 @@ $ docker run --rm -e OWM_API_KEY="xxxx" -e OWM_CITY="Honolulu" getweather:dev
 $ grep -i honolulu /var/log/syslog
 Nov 30 11:50:07 ubuntu-vm ae9395e86676[1621]: city="Honolulu",
 description="few clouds", temp=70.2, humidity=75
+```
+
+Link to DockerHub: [DockerHub Image](https://hub.docker.com/repository/docker/mikesindieiev/getweather/general)
+
+To run the container with that image execute the following command: 
+
+```bash
+$ docker run --rm -e OWM_API_KEY="xxxx" -e OWM_CITY="Honolulu" mikesindieiev/getweather:dev
 ```
 
 ## Exercise 2
