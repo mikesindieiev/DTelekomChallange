@@ -1,0 +1,15 @@
+---
+- name: Install pip3
+  apt:
+    name: ['python3-pip']
+    update_cache: yes
+
+- name: Copy requirements file with owner and permissions
+  ansible.builtin.copy:
+    src: ../Scripts/task1/requirements.txt
+    dest: "{{ req_dest }}"
+    mode: '0644'
+
+- name: Install specified python requirements
+  ansible.builtin.pip:
+    requirements: "{{ req_dest }}"

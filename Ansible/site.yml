@@ -3,6 +3,7 @@
   vars:
     docker_users: 
      - 'mike'
+    req_dest: '/tmp/requirements.txt'
   tasks:
   - name: Install required packages for Docker
     apt:
@@ -47,6 +48,8 @@
       name: docker
       state: restarted
       enabled: true
+
+  - include_tasks: python.yml
 
 # ToDo: 
 # harden the installation
